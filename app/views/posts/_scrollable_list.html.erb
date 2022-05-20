@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "posts-page-#{@pagy.page}" do %>
+  <div id="posts">
+    <% @posts.each do |post| %>
+      <h2>ID: <%= post.id %></h2>
+      <%= render post %>
+      <p>
+        <%= link_to "Show this post", post %>
+      </p>
+      <hr/>
+    <% end %>
+  </div>
+  <%= turbo_frame_tag "posts-page-#{@pagy.next}", loading: :lazy, src: pagy_url_for(@pagy, @pagy.next) %>
+<% end %>

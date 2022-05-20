@@ -1,0 +1,21 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Posts</h1>
+<h3>Pagy Count: <%= @pagy.count %></h3>
+<h3>Pagy URL For: <%= pagy_url_for(@pagy, @pagy.next) %></h3>
+<h3>Pagy Next: <%= @pagy.next %></h3>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <h2>ID: <%= post.id %></h2>
+    <%= render post %>
+    <p>
+      <%= link_to "Show this post", post %>
+    </p>
+    <hr/>
+  <% end %>
+</div>
+
+<%= turbo_frame_tag "posts-page-#{@pagy.next}", loading: :lazy, src: pagy_url_for(@pagy, @pagy.next) %>
+
+<%= link_to "New post", new_post_path %>
